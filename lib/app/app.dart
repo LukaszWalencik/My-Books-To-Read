@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_books_to_read/app/features/home_page/home_page.dart';
+import 'package:my_books_to_read/app/features/login_page/login_page.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -11,7 +12,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const HomePage(),
+      home: LoginPage(),
     );
   }
 }
