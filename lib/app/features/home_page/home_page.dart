@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:my_books_to_read/app/features/bottomnavigationbar/account/accountpage_content.dart';
 import 'package:my_books_to_read/app/features/bottomnavigationbar/booklist/booklist_content.dart';
+import 'package:my_books_to_read/app/features/bottomnavigationbar/empty/empty.dart';
 import 'package:my_books_to_read/app/features/bottomnavigationbar/myfavorites/myfavorites_content.dart';
 
 class HomePage extends StatefulWidget {
@@ -22,6 +23,17 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        actions: [
+          IconButton(
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (_) => AccountPage(email: widget.user.email),
+                  ),
+                );
+              },
+              icon: Icon(Icons.person))
+        ],
         centerTitle: true,
         backgroundColor: Colors.purple,
         title: const Text(
@@ -36,13 +48,13 @@ class _HomePageState extends State<HomePage> {
       body: Builder(
         builder: (context) {
           if (currentIndex == 0) {
-            return AccountPage();
+            return BookList();
           }
           if (currentIndex == 1) {
-            return MyFavorites();
+            return MyFavorites(email: widget.user.email, user: widget.user);
           }
 
-          return BookList();
+          return Empty();
 
           // return AccountPage(
           //   email: widget.user.email,
@@ -60,10 +72,10 @@ class _HomePageState extends State<HomePage> {
         selectedItemColor: Colors.white,
         unselectedItemColor: Colors.black54,
         items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Account'),
+          BottomNavigationBarItem(icon: Icon(Icons.list), label: 'Books'),
           BottomNavigationBarItem(
               icon: Icon(Icons.star), label: 'Favorite books'),
-          BottomNavigationBarItem(icon: Icon(Icons.list), label: 'Books'),
+          BottomNavigationBarItem(icon: Icon(Icons.circle), label: 'empty'),
         ],
       ),
     );
