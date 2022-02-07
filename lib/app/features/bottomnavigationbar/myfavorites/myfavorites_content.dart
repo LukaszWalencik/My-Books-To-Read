@@ -1,6 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:my_books_to_read/app/features/bottomnavigationbar/account/accountpage_content.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:my_books_to_read/app/features/bottomnavigationbar/myfavorites/cubit/myfavorites_cubit.dart';
 
 class MyFavorites extends StatelessWidget {
   const MyFavorites({required this.email, required this.user, Key? key})
@@ -9,6 +11,48 @@ class MyFavorites extends StatelessWidget {
   final User user;
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return BlocProvider(
+      create: (context) => MyfavoritesCubit()..start(),
+      child: BlocBuilder<MyfavoritesCubit, MyfavoritesState>(
+        builder: (context, state) {
+          if (state.errorMessage.isNotEmpty) {
+            return Text(state.errorMessage);
+          }
+          if (state.isLoading == true) {
+            return Center(child: CircularProgressIndicator());
+          }
+          final documents = state.documents;
+          return Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ListView(children: [
+                for (final document in documents) ...[
+                  Dismissible(
+                    key: ValueKey(document.id),
+                    onDismissed: (_) {
+                      FirebaseFirestore.instance
+                          .collection('books')
+                          .doc(document.id)
+                          .delete();
+                    },
+                    child: Container(
+                      color: Colors.black26,
+                      child: Row(
+                        children: [
+                          Column(
+                            children: [
+                              Text(document['name']),
+                              Text(document['author']),
+                              Text(document['age'].toString()),
+                            ],
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                ]
+              ]));
+        },
+      ),
+    );
   }
 }
