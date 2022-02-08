@@ -3,6 +3,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_books_to_read/app/features/bottomnavigationbar/myfavorites/cubit/myfavorites_cubit.dart';
+import 'package:my_books_to_read/models/item_models.dart';
+import 'package:my_books_to_read/repositories/item_repositories.dart';
 
 class MyFavorites extends StatelessWidget {
   const MyFavorites({required this.email, required this.user, Key? key})
@@ -12,7 +14,7 @@ class MyFavorites extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => MyfavoritesCubit()..start(),
+      create: (context) => MyfavoritesCubit(ItemRepository())..start(),
       child: BlocBuilder<MyfavoritesCubit, MyfavoritesState>(
         builder: (context, state) {
           if (state.errorMessage.isNotEmpty) {
@@ -21,11 +23,11 @@ class MyFavorites extends StatelessWidget {
           if (state.isLoading == true) {
             return Center(child: CircularProgressIndicator());
           }
-          final documents = state.documents;
+          final itemModels = state.documents;
           return Padding(
               padding: const EdgeInsets.all(8.0),
               child: ListView(children: [
-                for (final document in documents) ...[
+                for (final document in itemModels) ...[
                   Dismissible(
                     key: ValueKey(document.id),
                     onDismissed: (_) {
@@ -40,9 +42,9 @@ class MyFavorites extends StatelessWidget {
                         children: [
                           Column(
                             children: [
-                              Text(document['name']),
-                              Text(document['author']),
-                              Text(document['age'].toString()),
+                              Text(document.name),
+                              Text(document.author),
+                              Text(document.age.toString()),
                             ],
                           )
                         ],
