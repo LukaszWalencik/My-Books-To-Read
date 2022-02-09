@@ -8,7 +8,7 @@ part 'autorisation_state.dart';
 
 class AuthorisationCubit extends Cubit<AuthorisationState> {
   AuthorisationCubit()
-      : super(AuthorisationState(
+      : super(const AuthorisationState(
           user: null,
           isLoading: false,
           errorMessage: '',

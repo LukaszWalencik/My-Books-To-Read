@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:meta/meta.dart';
 import 'package:my_books_to_read/models/item_models.dart';
 import 'package:my_books_to_read/repositories/item_repositories.dart';
@@ -11,7 +10,7 @@ part 'myfavorites_state.dart';
 class MyfavoritesCubit extends Cubit<MyfavoritesState> {
   MyfavoritesCubit(
     this._itemRepository,
-  ) : super(MyfavoritesState(
+  ) : super(const MyfavoritesState(
           documents: [],
           errorMessage: '',
           isLoading: false,
@@ -22,7 +21,7 @@ class MyfavoritesCubit extends Cubit<MyfavoritesState> {
 
   Future<void> start() async {
     emit(
-      MyfavoritesState(documents: const [], isLoading: true, errorMessage: ''),
+      const MyfavoritesState(documents: [], isLoading: true, errorMessage: ''),
     );
 
     _streamSubscription = _itemRepository.getItemsStream().listen((documents) {
@@ -32,16 +31,15 @@ class MyfavoritesCubit extends Cubit<MyfavoritesState> {
       ..onError((error) {
         emit(
           MyfavoritesState(
-            documents: [],
+            documents: const [],
             isLoading: false,
             errorMessage: error.toString(),
           ),
         );
       });
-
-    ;
   }
 
+  @override
   Future<void> close() {
     _streamSubscription?.cancel();
     return super.close();

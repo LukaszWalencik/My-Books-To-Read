@@ -32,7 +32,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                 );
               },
-              icon: Icon(Icons.person))
+              icon: const Icon(Icons.person))
         ],
         centerTitle: true,
         backgroundColor: Colors.purple,
@@ -48,13 +48,13 @@ class _HomePageState extends State<HomePage> {
       body: Builder(
         builder: (context) {
           if (currentIndex == 0) {
-            return BookList();
+            return const BookList();
           }
           if (currentIndex == 1) {
             return MyFavorites(email: widget.user.email, user: widget.user);
           }
 
-          return Empty();
+          return const Empty();
 
           // return AccountPage(
           //   email: widget.user.email,

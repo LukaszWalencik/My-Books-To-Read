@@ -3,7 +3,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_books_to_read/app/features/bottomnavigationbar/myfavorites/cubit/myfavorites_cubit.dart';
-import 'package:my_books_to_read/models/item_models.dart';
 import 'package:my_books_to_read/repositories/item_repositories.dart';
 
 class MyFavorites extends StatelessWidget {
@@ -21,7 +20,7 @@ class MyFavorites extends StatelessWidget {
             return Text(state.errorMessage);
           }
           if (state.isLoading == true) {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           }
           final itemModels = state.documents;
           return Padding(
@@ -44,7 +43,6 @@ class MyFavorites extends StatelessWidget {
                             children: [
                               Text(document.name),
                               Text(document.author),
-                              Text(document.age.toString()),
                             ],
                           )
                         ],
