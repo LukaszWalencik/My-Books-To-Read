@@ -4,15 +4,23 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_books_to_read/app/core/enums.dart';
 import 'package:my_books_to_read/app/data/remote_data_sources/books_remote_data_source.dart';
 import 'package:my_books_to_read/app/features/bottomnavigationbar/booklist/cubit/booklist_cubit.dart';
-import 'package:my_books_to_read/models/item_models.dart';
+import 'package:my_books_to_read/models/book_models.dart';
+
+import 'package:my_books_to_read/repositories/book_repositories.dart';
 import 'package:my_books_to_read/repositories/item_repositories.dart';
 
-class BookList extends StatelessWidget {
+class BookList extends StatefulWidget {
   const BookList({
     Key? key,
   }) : super(key: key);
 
-  final booksModel = BooksModel;
+  @override
+  State<BookList> createState() => _BookListState();
+}
+
+class _BookListState extends State<BookList> {
+  final booksModel = BooksModel();
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -32,7 +40,7 @@ class BookList extends StatelessWidget {
         },
         child: BlocBuilder<BooklistCubit, BooklistState>(
           builder: (context, state) {
-            final searchcontroller = TextEditingController();
+            var searchcontroller = TextEditingController();
             // return Builder(builder: (context) {
             //   if (booksModel == null) {
             return Padding(
@@ -82,23 +90,63 @@ class BookList extends StatelessWidget {
                     if (state.status == Status.loading) {
                       return const Text('Loading');
                     }
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 8),
-                      child: Container(
-                        color: Colors.black26,
-                        child: Column(
-                          children: [
-                            Row(
+                    return Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 8),
+                          child: Container(
+                            color: Colors.black38,
+                            child: Column(
                               children: [
-                                Expanded(
-                                  child: Column(
-                                    children: [
-                                      Text(searchcontroller.text),
-                                    ],
-                                  ),
+                                Row(
+                                  children: [
+                                    Expanded(
+                                      child: Column(
+                                        children: [
+                                          Text(searchcontroller.text),
+                                        ],
+                                      ),
+                                    ),
+                                    FavoriteButton(
+                                      iconDisabledColor: Colors.black,
+                                      isFavorite: true,
+                                      valueChanged: () {
+                                        context.read<BooklistCubit>().add(
+                                            searchcontroller.text,
+                                            searchcontroller.text);
+                                      },
+                                    ),
+                                    IconButton(
+                                      icon: Icon(
+                                        Icons.star,
+                                        color: Colors.white,
+                                      ),
+                                      onPressed: () {
+                                        context.read<BooklistCubit>().add(
+                                            searchcontroller.text,
+                                            searchcontroller.text);
+                                      },
+                                    ),
+                                  ],
                                 ),
-                                Container(
-                                  child: FavoriteButton(
+                              ],
+                            ),
+                          ),
+                        ),
+                        Container(
+                          color: Colors.black38,
+                          child: Column(
+                            children: [
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: Column(
+                                      children: [
+                                        Text('example'),
+                                      ],
+                                    ),
+                                  ),
+                                  FavoriteButton(
                                     iconDisabledColor: Colors.black,
                                     isFavorite: true,
                                     valueChanged: () {
@@ -107,20 +155,19 @@ class BookList extends StatelessWidget {
                                           searchcontroller.text);
                                     },
                                   ),
-                                ),
-                                Container(
-                                    child: IconButton(
-                                  icon: Icon(
-                                    Icons.star,
-                                    color: Colors.white,
+                                  IconButton(
+                                    icon: Icon(
+                                      Icons.star,
+                                      color: Colors.white,
+                                    ),
+                                    onPressed: () {},
                                   ),
-                                  onPressed: () {},
-                                )),
-                              ],
-                            ),
-                          ],
+                                ],
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
+                      ],
                     );
                   })
                 ],

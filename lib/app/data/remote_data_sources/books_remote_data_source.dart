@@ -6,10 +6,10 @@ class BooksRemoteDataSource {
   }) async {
     try {
       final response = await Dio().get<List<dynamic>>(
-          'http://openlibrary.org/search.json?title=$bookName');
+          'https://openlibrary.org/search/authors.json?q=$bookName');
       final listDynamic = response.data;
 
-      print(listDynamic);
+      print(response.data);
       if (listDynamic == null) {
         return null;
       }

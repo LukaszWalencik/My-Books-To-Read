@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:my_books_to_read/app/data/remote_data_sources/books_remote_data_source.dart';
+import 'package:my_books_to_read/models/book_models.dart';
 import 'package:my_books_to_read/models/item_models.dart';
 
 class ItemRepository {
@@ -59,21 +60,22 @@ class ItemRepository {
   }
 }
 
-class BooksRepository {
-  BooksRepository(this._booksRemoteDataSource);
+// class BooksRepository {
+//   BooksRepository(this._booksRemoteDataSource);
 
-  final BooksRemoteDataSource _booksRemoteDataSource;
+//   final BooksRemoteDataSource _booksRemoteDataSource;
 
-  Future<List<BooksModel>> getBooksModel({
-    required String bookName,
-  }) async {
-    final responseData =
-        await _booksRemoteDataSource.getBooksData(bookName: bookName);
-    if (responseData == null) {
-      return [];
-    }
-    return responseData.map((item) => BooksModel.fromJson(item)).toList();
-    // final name = responseData['docs' 'title'] as String;
-    // return BooksModel(bookName: name);
-  }
-}
+//   Future<List<BooksModel>> getBooksModel({
+//     required String bookName,
+//   }) async {
+//     final responseData =
+//         await _booksRemoteDataSource.getBooksData(bookName: bookName);
+//     if (responseData == null) {
+//       return [];
+//     }
+//     return responseData.map((item) => BooksModel.fromJson(item)).toList();
+//     // final name = responseData['docs' 'title'] as String;
+//     // return BooksModel(bookName: name);
+//   }
+// }
+

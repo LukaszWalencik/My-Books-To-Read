@@ -3,7 +3,9 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:my_books_to_read/app/core/enums.dart';
+import 'package:my_books_to_read/models/book_models.dart';
 import 'package:my_books_to_read/models/item_models.dart';
+import 'package:my_books_to_read/repositories/book_repositories.dart';
 import 'package:my_books_to_read/repositories/item_repositories.dart';
 
 part 'booklist_state.dart';
@@ -20,7 +22,7 @@ class BooklistCubit extends Cubit<BooklistState> {
   }) async {
     emit(const BooklistState(status: Status.loading));
     try {
-      final booksModel = await _booksRepository.getBooksModel(bookName: name);
+      final booksModel = await _booksRepository.getBooksModel();
       emit(
         BooklistState(
           model: booksModel,

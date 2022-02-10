@@ -1,4 +1,3 @@
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -32,17 +31,27 @@ class MyFavorites extends StatelessWidget {
                     onDismissed: (_) {
                       context.read<MyfavoritesCubit>().delete(id: document.id);
                     },
-                    child: Container(
-                      color: Colors.black26,
-                      child: Row(
-                        children: [
-                          Column(
-                            children: [
-                              Text(document.name),
-                              Text(document.author),
-                            ],
-                          )
-                        ],
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Container(
+                        color: Colors.black26,
+                        child: Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Column(
+                                children: [
+                                  Text(
+                                    document.name,
+                                    style: TextStyle(fontSize: 20),
+                                  ),
+                                  Text(document.author,
+                                      style: TextStyle(fontSize: 20)),
+                                ],
+                              ),
+                            )
+                          ],
+                        ),
                       ),
                     ),
                   ),

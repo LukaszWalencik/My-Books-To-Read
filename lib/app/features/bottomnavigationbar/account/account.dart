@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_books_to_read/app/features/bottomnavigationbar/account/cubit/account_cubit.dart';
@@ -6,9 +7,11 @@ class AccountPage extends StatelessWidget {
   const AccountPage({
     Key? key,
     required this.email,
+    required this.user,
   }) : super(key: key);
 
   final String? email;
+  final User user;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +31,7 @@ class AccountPage extends StatelessWidget {
                   ElevatedButton(
                     onPressed: () {
                       context.read<AccountCubit>().signOut();
-                      Navigator.of(context).pop();
+                      // Navigator.of(context).pop();
                     },
                     child: const Text(
                       'Logout',
