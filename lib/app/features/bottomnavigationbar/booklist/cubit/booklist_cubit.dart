@@ -9,9 +9,11 @@ import 'package:my_books_to_read/repositories/item_repositories.dart';
 part 'booklist_state.dart';
 
 class BooklistCubit extends Cubit<BooklistState> {
-  BooklistCubit(this._booksRepository) : super(const BooklistState());
+  BooklistCubit(this._booksRepository, this._itemRepository)
+      : super(const BooklistState());
 
   final BooksRepository _booksRepository;
+  final ItemRepository _itemRepository;
 
   Future<void> getBooksModel({
     required String name,
@@ -32,6 +34,18 @@ class BooklistCubit extends Cubit<BooklistState> {
           errorMessage: error.toString(),
         ),
       );
+    }
+  }
+
+  Future<void> add(
+    String name,
+    String author,
+  ) async {
+    try {
+      await _itemRepository.add;
+      emit(const BooklistState(saved: true));
+    } catch (error) {
+      emit(BooklistState(errorMessage: error.toString()));
     }
   }
 }

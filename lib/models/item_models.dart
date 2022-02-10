@@ -7,7 +7,6 @@ class ItemModels {
 
   final String id;
   final String name;
-
   final String author;
 }
 
@@ -21,5 +20,5 @@ class BooksModel {
   // final String bookAuthor;
 
   BooksModel.fromJson(Map<String, dynamic> responseData)
-      : bookName = responseData['name']['title'];
+      : bookName = responseData['docs']['0']['title'];
 }

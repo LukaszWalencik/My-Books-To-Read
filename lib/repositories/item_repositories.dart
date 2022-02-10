@@ -17,7 +17,7 @@ class ItemRepository {
         .map((querySnapshot) {
       return querySnapshot.docs.map((doc) {
         return ItemModels(
-          id: doc['id'],
+          id: doc.id,
           name: doc['name'],
           author: doc['author'],
         );
@@ -37,6 +37,26 @@ class ItemRepository {
         .doc(id)
         .delete();
   }
+
+  Future<void> add(
+    String name,
+    String author,
+  ) async {
+    final userID = FirebaseAuth.instance.currentUser?.uid;
+    if (userID == null) {
+      throw Exception('Nie zalogowano');
+    }
+    await FirebaseFirestore.instance
+        .collection('users')
+        .doc(userID)
+        .collection('books')
+        .add(
+      {
+        'name': name,
+        'author': author,
+      },
+    );
+  }
 }
 
 class BooksRepository {
@@ -44,13 +64,15 @@ class BooksRepository {
 
   final BooksRemoteDataSource _booksRemoteDataSource;
 
-  Future<BooksModel?> getBooksModel({
+  Future<List<BooksModel>> getBooksModel({
     required String bookName,
   }) async {
     final responseData =
         await _booksRemoteDataSource.getBooksData(bookName: bookName);
-
-    return BooksModel.fromJson(responseData);
+    if (responseData == null) {
+      return [];
+    }
+    return responseData.map((item) => BooksModel.fromJson(item)).toList();
     // final name = responseData['docs' 'title'] as String;
     // return BooksModel(bookName: name);
   }
