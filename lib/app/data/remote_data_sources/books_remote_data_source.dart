@@ -1,18 +1,24 @@
 import 'package:dio/dio.dart';
+import 'package:my_books_to_read/models/book_model.dart';
 
 class BooksRemoteDataSource {
-  Future<Map<String, dynamic>> getBooksData({
+  Future<BookModel?> getBooksData({
     required String bookName,
   }) async {
     final response = await Dio()
         .get<Map<String, dynamic>>('http://openlibrary.org/search.json?q=the');
     final responseData = response.data;
-    if (responseData != null) {
-      final title = responseData['docs'][0]['title'];
 
-      print(title);
+    if (responseData == null) {
+      return null;
     }
-    return (response.data!['docs'][0]['title']);
+    final title = responseData['docs'][0]['title'] as String;
+
+    print(title);
+    return BookModel(title: title);
+
+    // return BookModel(title: title);
+    // (response.data!['docs'][0]['title']);
   }
 }
 // class BooksRemoteDataSource {

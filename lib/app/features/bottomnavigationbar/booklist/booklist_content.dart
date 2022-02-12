@@ -141,7 +141,7 @@ class _BookListState extends State<BookList> {
                                     child: Column(
                                       children: [
                                         Text('example'),
-                                        Text('state.model'),
+                                        Text(''),
                                       ],
                                     ),
                                   ),
