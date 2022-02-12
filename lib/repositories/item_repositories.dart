@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:my_books_to_read/app/data/remote_data_sources/books_remote_data_source.dart';
-import 'package:my_books_to_read/models/book_models.dart';
+import 'package:my_books_to_read/models/book_model.dart';
 import 'package:my_books_to_read/models/item_models.dart';
 
 class ItemRepository {

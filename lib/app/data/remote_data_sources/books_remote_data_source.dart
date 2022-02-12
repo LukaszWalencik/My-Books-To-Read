@@ -22,12 +22,14 @@ import 'package:dio/dio.dart';
 // }
 
 class BooksRemoteDataSource {
-  Future<Map<String, dynamic>> getBooksData({
+  Future<List<Map<String, dynamic>>> getBooksData({
     required String bookName,
   }) async {
     final response = await Dio()
         .get<Map<String, dynamic>>('http://openlibrary.org/search.json?q=lord');
     print(response.data);
-    return response.data!;
+    return (response.data!['docs'] as List<dynamic>)
+        .map((e) => e as Map<String, dynamic>)
+        .toList();
   }
 }
