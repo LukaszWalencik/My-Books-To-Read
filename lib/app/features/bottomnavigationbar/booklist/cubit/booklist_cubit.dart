@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:my_books_to_read/app/core/enums.dart';
-import 'package:my_books_to_read/models/book_models.dart';
+import 'package:my_books_to_read/models/book_model.dart';
 import 'package:my_books_to_read/models/item_models.dart';
 import 'package:my_books_to_read/repositories/book_repositories.dart';
 import 'package:my_books_to_read/repositories/item_repositories.dart';

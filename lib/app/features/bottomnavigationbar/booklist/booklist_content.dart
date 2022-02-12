@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_books_to_read/app/core/enums.dart';
 import 'package:my_books_to_read/app/data/remote_data_sources/books_remote_data_source.dart';
 import 'package:my_books_to_read/app/features/bottomnavigationbar/booklist/cubit/booklist_cubit.dart';
-import 'package:my_books_to_read/models/book_models.dart';
+import 'package:my_books_to_read/models/book_model.dart';
 
 import 'package:my_books_to_read/repositories/book_repositories.dart';
 import 'package:my_books_to_read/repositories/item_repositories.dart';
@@ -19,8 +19,6 @@ class BookList extends StatefulWidget {
 }
 
 class _BookListState extends State<BookList> {
-  final booksModel = BooksModel();
-
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -143,6 +141,7 @@ class _BookListState extends State<BookList> {
                                     child: Column(
                                       children: [
                                         Text('example'),
+                                        Text('state.model'),
                                       ],
                                     ),
                                   ),
