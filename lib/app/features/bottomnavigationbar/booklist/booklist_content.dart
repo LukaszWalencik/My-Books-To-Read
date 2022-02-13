@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:favorite_button/favorite_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -23,7 +24,8 @@ class _BookListState extends State<BookList> {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => BooklistCubit(
-          BooksRepository(BooksRemoteDataSource()), ItemRepository()),
+          BooksRepository(BooksRemoteRetrofitDataSource(Dio())),
+          ItemRepository()),
       child: BlocListener<BooklistCubit, BooklistState>(
         listener: (context, state) {
           if (state.status == Status.error) {
@@ -62,14 +64,14 @@ class _BookListState extends State<BookList> {
                           controller: searchcontroller,
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 5,
                       ),
                       ElevatedButton.icon(
                         onPressed: () {
                           context
                               .read<BooklistCubit>()
-                              .getBookModel(name: searchcontroller.text);
+                              .getBookModel(bookName: searchcontroller.text);
                         },
                         icon: const Icon(Icons.search),
                         label: const Text('Search'),
@@ -81,59 +83,28 @@ class _BookListState extends State<BookList> {
                     ],
                   ),
                   Builder(builder: (context) {
-                    for (final book in state.model)
-                      if (book == null) {
-                        const Text('No results found');
-                      }
-                    if (state.status == Status.loading) {
+                    if (state.status == Status.error) {
                       return const Center(
-                        child: CircularProgressIndicator(),
+                        child: Text('Unknown error',
+                            style: TextStyle(color: Colors.red)),
                       );
                     }
-                    return Expanded(
-                      child: ListView(
-                        children: [
-                          for (final book in state.model)
-                            if (book != null)
-                              BookPosition(
-                                  bookModel: book,
-                                  searchcontroller: searchcontroller),
-                        ],
-                      ),
+                    if (state.status == Status.loading) {
+                      return const CircularProgressIndicator();
+                    }
+
+                    return Column(
+                      children: [
+                        for (final book in state.model)
+                          BookPosition(
+                            bookModel: book,
+                          ),
+                      ],
                     );
                   })
                 ],
               ),
             );
-            //   }
-            //   if (state.status == Status.loading) {
-            //     return const Text('Loading');
-            //   }
-            //   return Padding(
-            //     padding: const EdgeInsets.all(8.0),
-            //     child: Column(
-            //       children: [
-            //         Text('gg')
-            //         // SearchLine(),
-            //         // Padding(
-            //         //   padding: const EdgeInsets.all(8.0),
-            //         //   child: Row(
-            //         //     children: [
-            //         //       Column(
-            //         //         children: [Text('booksModel.bookName')],
-            //         //       ),
-            //         //       IconButton(
-            //         //           onPressed: () {}, icon: const Icon(Icons.star))
-            //         //     ],
-            //         //   ),
-            //         // )
-            //         // BooksList(
-            //         //   booksModel: booksModel,
-            //         // )
-            //       ],
-            //     ),
-            //   );
-            // });
           },
         ),
       ),
@@ -145,48 +116,57 @@ class BookPosition extends StatelessWidget {
   const BookPosition({
     Key? key,
     required this.bookModel,
-    required this.searchcontroller,
   }) : super(key: key);
 
-  final TextEditingController searchcontroller;
   final BookModel bookModel;
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<BooklistCubit, BooklistState>(
       builder: (context, state) {
-        return Container(
-          color: Colors.black38,
-          child: Column(
-            children: [
-              Row(
+        return ListView(
+          children: [
+            Container(
+              color: Colors.black38,
+              child: Column(
                 children: [
-                  Expanded(
-                    child: Column(
-                      children: [
-                        Text(bookModel.title),
-                      ],
-                    ),
-                  ),
-                  FavoriteButton(
-                    iconDisabledColor: Colors.black,
-                    isFavorite: true,
-                    valueChanged: () {
-                      context
-                          .read<BooklistCubit>()
-                          .add(searchcontroller.text, searchcontroller.text);
-                    },
-                  ),
-                  IconButton(
-                    icon: Icon(
-                      Icons.star,
-                      color: Colors.white,
-                    ),
-                    onPressed: () {},
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Column(
+                          children: [
+                            Text(bookModel.title),
+                            Text(bookModel.authorName),
+                            const Text('example')
+                          ],
+                        ),
+                      ),
+                      IconButton(
+                        icon: const Icon(
+                          Icons.star,
+                          color: Colors.white,
+                        ),
+                        onPressed: () {},
+                      ),
+                      BlocBuilder<BooklistCubit, BooklistState>(
+                        builder: (context, state) {
+                          return StarButton(
+                            isStarred: false,
+                            // iconDisabledColor: Colors.white,
+                            valueChanged: (_isStarred) {
+                              context.read<BooklistCubit>().add(
+                                    author: bookModel.authorName,
+                                    name: bookModel.title,
+                                  );
+                            },
+                          );
+                        },
+                      ),
+                    ],
                   ),
                 ],
               ),
-            ],
-          ),
+            ),
+          ],
         );
       },
     );

@@ -43,10 +43,10 @@ class MyFavorites extends StatelessWidget {
                                 children: [
                                   Text(
                                     document.name,
-                                    style: TextStyle(fontSize: 20),
+                                    style: const TextStyle(fontSize: 20),
                                   ),
                                   Text(document.author,
-                                      style: TextStyle(fontSize: 20)),
+                                      style: const TextStyle(fontSize: 20)),
                                 ],
                               ),
                             )

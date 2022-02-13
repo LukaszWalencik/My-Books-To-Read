@@ -4,27 +4,26 @@ import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:my_books_to_read/app/core/enums.dart';
 import 'package:my_books_to_read/models/book_model.dart';
-import 'package:my_books_to_read/models/item_models.dart';
 import 'package:my_books_to_read/repositories/book_repositories.dart';
 import 'package:my_books_to_read/repositories/item_repositories.dart';
 
 part 'booklist_state.dart';
 
 class BooklistCubit extends Cubit<BooklistState> {
-  BooklistCubit(this._booksRepository, this._itemRepository)
+  BooklistCubit(this.booksRepository, this._itemRepository)
       : super(const BooklistState());
 
-  final BooksRepository _booksRepository;
+  final BooksRepository booksRepository;
   final ItemRepository _itemRepository;
 
   Future<void> getBookModel({
-    required String name,
+    required String bookName,
   }) async {
     emit(
       const BooklistState(status: Status.loading),
     );
     try {
-      final bookModel = await _booksRepository.getBookModel(title: name);
+      final bookModel = await booksRepository.getBookModel(bookName: bookName);
       emit(
         BooklistState(
           model: bookModel,
@@ -41,13 +40,10 @@ class BooklistCubit extends Cubit<BooklistState> {
     }
   }
 
-  Future<void> add(
-    String name,
-    String author,
-  ) async {
+  Future<void> add({required String name, required String author}) async {
     try {
-      await _itemRepository.add;
-      emit(const BooklistState(saved: true));
+      await _itemRepository.add(name, author);
+      emit(const BooklistState());
     } catch (error) {
       emit(BooklistState(errorMessage: error.toString()));
     }

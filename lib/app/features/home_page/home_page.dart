@@ -49,7 +49,7 @@ class _HomePageState extends State<HomePage> {
       body: Builder(
         builder: (context) {
           if (currentIndex == 0) {
-            return BookList();
+            return const BookList();
           }
           if (currentIndex == 1) {
             return MyFavorites(email: widget.user.email, user: widget.user);
