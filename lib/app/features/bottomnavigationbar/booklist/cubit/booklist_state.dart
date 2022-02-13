@@ -8,7 +8,7 @@ class BooklistState {
     this.status = Status.initial,
     this.errorMessage,
   });
-  final String? model;
+  final BookModel? model;
   final bool saved;
   final Status status;
   final String? errorMessage;

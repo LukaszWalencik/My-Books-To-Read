@@ -131,41 +131,10 @@ class _BookListState extends State<BookList> {
                             ),
                           ),
                         ),
-                        Container(
-                          color: Colors.black38,
-                          child: Column(
-                            children: [
-                              Row(
-                                children: [
-                                  Expanded(
-                                    child: Column(
-                                      children: [
-                                        Text('example'),
-                                        Text(''),
-                                      ],
-                                    ),
-                                  ),
-                                  FavoriteButton(
-                                    iconDisabledColor: Colors.black,
-                                    isFavorite: true,
-                                    valueChanged: () {
-                                      context.read<BooklistCubit>().add(
-                                          searchcontroller.text,
-                                          searchcontroller.text);
-                                    },
-                                  ),
-                                  IconButton(
-                                    icon: Icon(
-                                      Icons.star,
-                                      color: Colors.white,
-                                    ),
-                                    onPressed: () {},
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
+                        if (booksModel != null)
+                          BookPosition(
+                              bookModel: booksModel,
+                              searchcontroller: searchcontroller),
                       ],
                     );
                   })
@@ -204,6 +173,59 @@ class _BookListState extends State<BookList> {
           },
         ),
       ),
+    );
+  }
+}
+
+class BookPosition extends StatelessWidget {
+  const BookPosition({
+    Key? key,
+    required this.bookModel,
+    required this.searchcontroller,
+  }) : super(key: key);
+
+  final TextEditingController searchcontroller;
+  final BookModel bookModel;
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<BooklistCubit, BooklistState>(
+      builder: (context, state) {
+        return Container(
+          color: Colors.black38,
+          child: Column(
+            children: [
+              Row(
+                children: [
+                  Expanded(
+                    child: Column(
+                      children: [
+                        Text('example'),
+                        Text(bookModel.title),
+                      ],
+                    ),
+                  ),
+                  FavoriteButton(
+                    iconDisabledColor: Colors.black,
+                    isFavorite: true,
+                    valueChanged: () {
+                      context
+                          .read<BooklistCubit>()
+                          .add(searchcontroller.text, searchcontroller.text);
+                    },
+                  ),
+                  IconButton(
+                    icon: Icon(
+                      Icons.star,
+                      color: Colors.white,
+                    ),
+                    onPressed: () {},
+                  ),
+                ],
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 }

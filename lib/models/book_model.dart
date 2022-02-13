@@ -9,8 +9,8 @@ class BookModel {
 
   final String title;
 
-  factory BookModel.fromJson(Map<String, dynamic> json) =>
-      _$BookModelFromJson(json);
+  // factory BookModel.fromJson(Map<String, dynamic> json) =>
+  //     _$BookModelFromJson(json);
 
-  Map<String, dynamic> toJson() => _$BookModelToJson(this);
+  // Map<String, dynamic> toJson() => _$BookModelToJson(this);
 }

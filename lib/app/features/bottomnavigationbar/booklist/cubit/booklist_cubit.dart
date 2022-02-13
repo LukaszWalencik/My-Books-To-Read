@@ -22,7 +22,7 @@ class BooklistCubit extends Cubit<BooklistState> {
   }) async {
     emit(const BooklistState(status: Status.loading));
     try {
-      final booksModel = await _booksRepository.getBooksModel();
+      final booksModel = await _booksRepository.getBooksModel(title: name);
       emit(
         BooklistState(
           model: booksModel,

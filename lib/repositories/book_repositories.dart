@@ -5,9 +5,17 @@ import 'package:my_books_to_read/models/book_model.dart';
 class BooksRepository {
   BooksRepository(this._booksRemoteDataSource);
   final BooksRemoteDataSource _booksRemoteDataSource;
-  Future<String> getBooksModel() async {
-    _booksRemoteDataSource.getBooksData(bookName: 'lord');
-    return '';
+
+  Future<BookModel?> getBooksModel({required String title}) async {
+    final responseData =
+        await _booksRemoteDataSource.getBooksData(bookName: title);
+
+    final name = responseData['docs'][0]['title'] as String;
+
+    _booksRemoteDataSource.getBooksData(bookName: name);
+
+    return BookModel(title: name);
+
     //   final url = Uri.parse('http://openlibrary.org/search.json?q=lord');
     //   final response = await http.post(url);
     //   final bookModel = BookModel.fromJson(response.body);
