@@ -17,15 +17,17 @@ class BooklistCubit extends Cubit<BooklistState> {
   final BooksRepository _booksRepository;
   final ItemRepository _itemRepository;
 
-  Future<void> getBooksModel({
+  Future<void> getBookModel({
     required String name,
   }) async {
-    emit(const BooklistState(status: Status.loading));
+    emit(
+      const BooklistState(status: Status.loading),
+    );
     try {
-      final booksModel = await _booksRepository.getBooksModel(title: name);
+      final bookModel = await _booksRepository.getBookModel(title: name);
       emit(
         BooklistState(
-          model: booksModel,
+          model: bookModel,
           status: Status.success,
         ),
       );

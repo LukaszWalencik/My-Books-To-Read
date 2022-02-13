@@ -9,6 +9,8 @@ class BookModel {
 
   final String title;
 
+  BookModel.fromJson(Map<String, dynamic> json) : title = json['title'];
+
   // factory BookModel.fromJson(Map<String, dynamic> json) =>
   //     _$BookModelFromJson(json);
 

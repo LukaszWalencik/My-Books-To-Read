@@ -1,52 +1,27 @@
 import 'package:dio/dio.dart';
 import 'package:my_books_to_read/models/book_model.dart';
 
+// class BooksRemoteDataSource {
+//   Future<Map<String, dynamic>> getBooksData({
+//     required String bookName,
+//   }) async {
+//     final response = await Dio().get<Map<String, dynamic>>(
+//         'http://openlibrary.org/search.json?q=$bookName');
+//     return response.data!;
+//   }
+// }
 class BooksRemoteDataSource {
-  Future<Map<String, dynamic>> getBooksData({
+  Future<List<Map<String, dynamic>>?> getBooks({
     required String bookName,
   }) async {
-    final response = await Dio().get<Map<String, dynamic>>(
-        'http://openlibrary.org/search.json?q=$bookName');
-    // final responseData = response.data;
+    final response = await Dio()
+        .get<List<dynamic>>('http://openlibrary.org/search.json?q=$bookName');
 
-    // if (responseData == null) {
-    //   return null;
-    // }
-    // final title = responseData['docs'][0]['title'] as String;
+    final listDynamic = response.data;
 
-    // print(title);
-    return response.data!;
-
-    // return BookModel(title: title);
-    // (response.data!['docs'][0]['title']);
+    if (listDynamic == null) {
+      return null;
+    }
+    return listDynamic.map((e) => e as Map<String, dynamic>).toList();
   }
 }
-// class BooksRemoteDataSource {
-//   Future<List<Map<String, dynamic>>> getBooksData({
-//     required String bookName,
-//   }) async {
-//     final response = await Dio()
-//         .get<Map<String, dynamic>>('http://openlibrary.org/search.json?q=the');
-   
-//     print(response.data);
-//     return (response.data!['docs'] as List<dynamic>)
-//         .map((e) => e as Map<String, dynamic>)
-//         .toList();
-//   }
-// }
-
-// class BooksRemoteDataSource {
-//   Future<List<Map<String, dynamic>>> getBooksData({
-//     required String bookName,
-//   }) async {
-//     final response = await Dio()
-//         .get<Map<String, dynamic>>('http://openlibrary.org/search.json?q=lord');
-//     final responseData = response.data;
-//     if (responseData != null) {
-//       final name = responseData['docs'][0]['title'];
-
-//       print(name);
-//     }
-//     return (response.data!['docs']['2']['title']);
-//   }
-// }

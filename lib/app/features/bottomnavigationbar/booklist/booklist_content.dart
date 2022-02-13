@@ -69,7 +69,7 @@ class _BookListState extends State<BookList> {
                         onPressed: () {
                           context
                               .read<BooklistCubit>()
-                              .getBooksModel(name: searchcontroller.text);
+                              .getBookModel(name: searchcontroller.text);
                         },
                         icon: const Icon(Icons.search),
                         label: const Text('Search'),
@@ -81,61 +81,25 @@ class _BookListState extends State<BookList> {
                     ],
                   ),
                   Builder(builder: (context) {
-                    final booksModel = state.model;
-                    if (booksModel == null) {
-                      const Text('Wartość null');
-                    }
+                    for (final book in state.model)
+                      if (book == null) {
+                        const Text('No results found');
+                      }
                     if (state.status == Status.loading) {
-                      return const Text('Loading');
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
                     }
-                    return Column(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 8),
-                          child: Container(
-                            color: Colors.black38,
-                            child: Column(
-                              children: [
-                                Row(
-                                  children: [
-                                    Expanded(
-                                      child: Column(
-                                        children: [
-                                          Text(searchcontroller.text),
-                                        ],
-                                      ),
-                                    ),
-                                    FavoriteButton(
-                                      iconDisabledColor: Colors.black,
-                                      isFavorite: true,
-                                      valueChanged: () {
-                                        context.read<BooklistCubit>().add(
-                                            searchcontroller.text,
-                                            searchcontroller.text);
-                                      },
-                                    ),
-                                    IconButton(
-                                      icon: Icon(
-                                        Icons.star,
-                                        color: Colors.white,
-                                      ),
-                                      onPressed: () {
-                                        context.read<BooklistCubit>().add(
-                                            searchcontroller.text,
-                                            searchcontroller.text);
-                                      },
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        if (booksModel != null)
-                          BookPosition(
-                              bookModel: booksModel,
-                              searchcontroller: searchcontroller),
-                      ],
+                    return Expanded(
+                      child: Column(
+                        children: [
+                          for (final book in state.model)
+                            if (book != null)
+                              BookPosition(
+                                  bookModel: book,
+                                  searchcontroller: searchcontroller),
+                        ],
+                      ),
                     );
                   })
                 ],
@@ -199,7 +163,6 @@ class BookPosition extends StatelessWidget {
                   Expanded(
                     child: Column(
                       children: [
-                        Text('example'),
                         Text(bookModel.title),
                       ],
                     ),
