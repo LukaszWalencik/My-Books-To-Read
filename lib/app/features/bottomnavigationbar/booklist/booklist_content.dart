@@ -91,7 +91,7 @@ class _BookListState extends State<BookList> {
                       );
                     }
                     return Expanded(
-                      child: Column(
+                      child: ListView(
                         children: [
                           for (final book in state.model)
                             if (book != null)

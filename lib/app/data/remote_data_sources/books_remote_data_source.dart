@@ -14,14 +14,19 @@ class BooksRemoteDataSource {
   Future<List<Map<String, dynamic>>?> getBooks({
     required String bookName,
   }) async {
-    final response = await Dio()
-        .get<List<dynamic>>('http://openlibrary.org/search.json?q=$bookName');
+    try {
+      final response = await Dio()
+          .get<List<dynamic>>('http://openlibrary.org/search.json?q=$bookName');
 
-    final listDynamic = response.data;
+      final listDynamic = response.data;
 
-    if (listDynamic == null) {
-      return null;
+      if (listDynamic == null) {
+        return null;
+      }
+      return listDynamic.map((e) => e as Map<String, dynamic>).toList();
+    } on DioError catch (error) {
+      throw Exception(
+          error.response?.data['error']['message'] ?? 'unknown erorr');
     }
-    return listDynamic.map((e) => e as Map<String, dynamic>).toList();
   }
 }
