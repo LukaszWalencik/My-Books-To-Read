@@ -26,7 +26,7 @@ class BooklistCubit extends Cubit<BooklistState> {
       final bookModel = await booksRepository.getBookModel(bookName: bookName);
       emit(
         BooklistState(
-          model: bookModel,
+          // model: bookModel,
           status: Status.success,
         ),
       );

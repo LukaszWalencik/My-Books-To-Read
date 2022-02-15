@@ -24,8 +24,7 @@ class _BookListState extends State<BookList> {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => BooklistCubit(
-          BooksRepository(BooksRemoteRetrofitDataSource(Dio())),
-          ItemRepository()),
+          BooksRepository(BooksRemoteDataSource()), ItemRepository()),
       child: BlocListener<BooklistCubit, BooklistState>(
         listener: (context, state) {
           if (state.status == Status.error) {
@@ -134,8 +133,8 @@ class BookPosition extends StatelessWidget {
                       Expanded(
                         child: Column(
                           children: [
-                            Text(bookModel.title),
-                            Text(bookModel.authorName),
+                            Text('bookModel.docs.'),
+                            Text('bookModel.authorName'),
                             const Text('example')
                           ],
                         ),
@@ -153,10 +152,10 @@ class BookPosition extends StatelessWidget {
                             isStarred: false,
                             // iconDisabledColor: Colors.white,
                             valueChanged: (_isStarred) {
-                              context.read<BooklistCubit>().add(
-                                    author: bookModel.authorName,
-                                    name: bookModel.title,
-                                  );
+                              // context.read<BooklistCubit>().add(
+                              // author: bookModel.authorName,
+                              // name: bookModel.title,
+                              // );
                             },
                           );
                         },

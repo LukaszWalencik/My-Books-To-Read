@@ -1,38 +1,40 @@
-// import 'package:json_annotation/json_annotation.dart';
-
+import 'dart:convert';
 import 'package:freezed_annotation/freezed_annotation.dart';
-part 'book_model.freezed.dart';
+
+// part 'book_model.freezed.dart';
 part 'book_model.g.dart';
 
-@freezed
-class BookModel with _$BookModel {
-  factory BookModel(
-    String title,
-    @JsonKey(name: 'author_name') String authorName,
-  ) = _BookModel;
+class BookModel {
+  BookModel({
+    this.docs,
+  });
 
-  factory BookModel.fromJson(Map<String, dynamic> json) =>
-      _$BookModelFromJson(json);
+  List<Doc>? docs;
+
+  factory BookModel.fromRawJson(String str) =>
+      BookModel.fromJson(json.decode(str));
+
+  factory BookModel.fromJson(Map<String, dynamic> json) => BookModel(
+        docs: List<Doc>.from(json["docs"].map((x) => Doc.fromJson(x))),
+      );
 }
 
-// @JsonSerializable()
-// class BookModel {
-//   const BookModel({
-//     required this.title,
-//     required this.authorName,
-//   });
+class Doc {
+  Doc({
+    this.coverI,
+    required this.title,
+    this.authorName,
+  });
 
-//   final String title;
+  int? coverI;
+  String title;
+  List<String>? authorName;
 
-//   @JsonKey(name: 'author_name')
-//   final String authorName;
+  factory Doc.fromRawJson(String str) => Doc.fromJson(json.decode(str));
 
-//   factory BookModel.fromJson(Map<String, dynamic> json) =>
-//       _$BookModelFromJson(json);
-//   Map<String, dynamic> toJson() => _$BookModelToJson(this);
-// }
-
-//   BookModel.fromJson(Map<String, dynamic> json)
-//       : title = json['title'],
-//         authorName = json['author_name'];
-// }
+  factory Doc.fromJson(Map<String, dynamic> json) => Doc(
+        coverI: json["cover_i"],
+        title: json["title"],
+        authorName: List<String>.from(json["author_name"].map((x) => x)),
+      );
+}
