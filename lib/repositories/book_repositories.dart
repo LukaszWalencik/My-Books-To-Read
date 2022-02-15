@@ -5,10 +5,12 @@ class BooksRepository {
   BooksRepository(this.booksRemoteDataSource);
   final BooksRemoteDataSource booksRemoteDataSource;
 
-  Future<String> getBookModel({required String bookName}) async {
-    final json = await booksRemoteDataSource.getBooks(bookName: bookName);
-
-    return json;
-    // .map((item) => BookModel.fromJson(item)).toList();
+  Future<BookModel?> getBookModel({required String bookName}) async {
+    final futureBookModel =
+        await booksRemoteDataSource.getBooks(bookName: bookName);
+    if (futureBookModel == null) {
+      return null;
+    }
+    return BookModel.fromJson(futureBookModel);
   }
 }

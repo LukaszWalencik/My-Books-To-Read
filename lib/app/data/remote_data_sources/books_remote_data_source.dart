@@ -1,16 +1,16 @@
-// import 'package:dio/dio.dart';
-// import 'package:my_books_to_read/models/book_model.dart';
-// import 'package:retrofit/retrofit.dart';
+import 'package:dio/dio.dart';
+import 'package:my_books_to_read/models/book_model.dart';
+import 'package:retrofit/retrofit.dart';
 
-// // class BooksRemoteDataSource {
-// //   Future<Map<String, dynamic>> getBooksData({
-// //     required String bookName,
-// //   }) async {
-// //     final response = await Dio().get<Map<String, dynamic>>(
-// //         'http://openlibrary.org/search.json?q=$bookName');
-// //     return response.data!;
-// //   }
-// // }
+class BooksRemoteDataSource {
+  Future<Map<String, dynamic>?> getBooks({
+    required String bookName,
+  }) async {
+    final response = await Dio().get<Map<String, dynamic>>(
+        'http://openlibrary.org/search.json?q=$bookName');
+    return response.data;
+  }
+}
 
 // part 'books_remote_data_source.g.dart';
 
@@ -48,22 +48,22 @@
 //   }
 // }
 
-import 'package:http/http.dart' as http;
-import 'package:my_books_to_read/models/book_model.dart';
+// import 'package:http/http.dart' as http;
+// import 'package:my_books_to_read/models/book_model.dart';
 
-class BooksRemoteDataSource {
-  Future<String> getBooks({
-    required String bookName,
-  }) async {
-    var url =
-        Uri.parse('http://openlibrary.org/search.json?q=the+lord+of+the+rings');
-    final response = await http.get(url);
-    final responseList = response;
-    final docModel = Doc.fromRawJson(response.body);
-    print('Response status: ${response.statusCode}');
-    print('Response body: ${response.body}');
-    print(responseList.toString());
-    // .map((item) => item as Map<String, dynamic>).toList();
-    return docModel.title.toString();
-  }
-}
+// class BooksRemoteDataSource {
+//   Future<String> getBooks({
+//     required String bookName,
+//   }) async {
+//     var url =
+//         Uri.parse('http://openlibrary.org/search.json?q=the+lord+of+the+rings');
+//     final json = await http.get(url);
+//     final responseList = json;
+//     final docModel = Doc.fromJson(json);
+//     print('Response status: ${json.statusCode}');
+//     print('Response body: ${json.body}');
+//     print(responseList.toString());
+//     // .map((item) => item as Map<String, dynamic>).toList();
+//     return docModel.toString();
+//   }
+// }
