@@ -22,11 +22,9 @@ BookModel _$BookModelFromJson(Map<String, dynamic> json) {
 class _$BookModelTearOff {
   const _$BookModelTearOff();
 
-  _BookModel call(
-      String title, @JsonKey(name: 'author_name') String authorName) {
+  _BookModel call(List<Doc> docs) {
     return _BookModel(
-      title,
-      authorName,
+      docs,
     );
   }
 
@@ -40,9 +38,7 @@ const $BookModel = _$BookModelTearOff();
 
 /// @nodoc
 mixin _$BookModel {
-  String get title => throw _privateConstructorUsedError;
-  @JsonKey(name: 'author_name')
-  String get authorName => throw _privateConstructorUsedError;
+  List<Doc> get docs => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -54,7 +50,7 @@ mixin _$BookModel {
 abstract class $BookModelCopyWith<$Res> {
   factory $BookModelCopyWith(BookModel value, $Res Function(BookModel) then) =
       _$BookModelCopyWithImpl<$Res>;
-  $Res call({String title, @JsonKey(name: 'author_name') String authorName});
+  $Res call({List<Doc> docs});
 }
 
 /// @nodoc
@@ -67,18 +63,13 @@ class _$BookModelCopyWithImpl<$Res> implements $BookModelCopyWith<$Res> {
 
   @override
   $Res call({
-    Object? title = freezed,
-    Object? authorName = freezed,
+    Object? docs = freezed,
   }) {
     return _then(_value.copyWith(
-      title: title == freezed
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
-              as String,
-      authorName: authorName == freezed
-          ? _value.authorName
-          : authorName // ignore: cast_nullable_to_non_nullable
-              as String,
+      docs: docs == freezed
+          ? _value.docs
+          : docs // ignore: cast_nullable_to_non_nullable
+              as List<Doc>,
     ));
   }
 }
@@ -89,7 +80,7 @@ abstract class _$BookModelCopyWith<$Res> implements $BookModelCopyWith<$Res> {
           _BookModel value, $Res Function(_BookModel) then) =
       __$BookModelCopyWithImpl<$Res>;
   @override
-  $Res call({String title, @JsonKey(name: 'author_name') String authorName});
+  $Res call({List<Doc> docs});
 }
 
 /// @nodoc
@@ -103,18 +94,13 @@ class __$BookModelCopyWithImpl<$Res> extends _$BookModelCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? title = freezed,
-    Object? authorName = freezed,
+    Object? docs = freezed,
   }) {
     return _then(_BookModel(
-      title == freezed
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
-              as String,
-      authorName == freezed
-          ? _value.authorName
-          : authorName // ignore: cast_nullable_to_non_nullable
-              as String,
+      docs == freezed
+          ? _value.docs
+          : docs // ignore: cast_nullable_to_non_nullable
+              as List<Doc>,
     ));
   }
 }
@@ -122,20 +108,17 @@ class __$BookModelCopyWithImpl<$Res> extends _$BookModelCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_BookModel implements _BookModel {
-  _$_BookModel(this.title, @JsonKey(name: 'author_name') this.authorName);
+  _$_BookModel(this.docs);
 
   factory _$_BookModel.fromJson(Map<String, dynamic> json) =>
       _$$_BookModelFromJson(json);
 
   @override
-  final String title;
-  @override
-  @JsonKey(name: 'author_name')
-  final String authorName;
+  final List<Doc> docs;
 
   @override
   String toString() {
-    return 'BookModel(title: $title, authorName: $authorName)';
+    return 'BookModel(docs: $docs)';
   }
 
   @override
@@ -143,16 +126,12 @@ class _$_BookModel implements _BookModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _BookModel &&
-            const DeepCollectionEquality().equals(other.title, title) &&
-            const DeepCollectionEquality()
-                .equals(other.authorName, authorName));
+            const DeepCollectionEquality().equals(other.docs, docs));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(title),
-      const DeepCollectionEquality().hash(authorName));
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(docs));
 
   @JsonKey(ignore: true)
   @override
@@ -166,20 +145,209 @@ class _$_BookModel implements _BookModel {
 }
 
 abstract class _BookModel implements BookModel {
-  factory _BookModel(
-          String title, @JsonKey(name: 'author_name') String authorName) =
-      _$_BookModel;
+  factory _BookModel(List<Doc> docs) = _$_BookModel;
 
   factory _BookModel.fromJson(Map<String, dynamic> json) =
       _$_BookModel.fromJson;
 
   @override
-  String get title;
-  @override
-  @JsonKey(name: 'author_name')
-  String get authorName;
+  List<Doc> get docs;
   @override
   @JsonKey(ignore: true)
   _$BookModelCopyWith<_BookModel> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+Doc _$DocFromJson(Map<String, dynamic> json) {
+  return _Doc.fromJson(json);
+}
+
+/// @nodoc
+class _$DocTearOff {
+  const _$DocTearOff();
+
+  _Doc call(@JsonKey(name: 'cover_i') int? coverI,
+      @JsonKey(name: 'author_name') List<String>? authorName, String title) {
+    return _Doc(
+      coverI,
+      authorName,
+      title,
+    );
+  }
+
+  Doc fromJson(Map<String, Object?> json) {
+    return Doc.fromJson(json);
+  }
+}
+
+/// @nodoc
+const $Doc = _$DocTearOff();
+
+/// @nodoc
+mixin _$Doc {
+  @JsonKey(name: 'cover_i')
+  int? get coverI => throw _privateConstructorUsedError;
+  @JsonKey(name: 'author_name')
+  List<String>? get authorName => throw _privateConstructorUsedError;
+  String get title => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $DocCopyWith<Doc> get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $DocCopyWith<$Res> {
+  factory $DocCopyWith(Doc value, $Res Function(Doc) then) =
+      _$DocCopyWithImpl<$Res>;
+  $Res call(
+      {@JsonKey(name: 'cover_i') int? coverI,
+      @JsonKey(name: 'author_name') List<String>? authorName,
+      String title});
+}
+
+/// @nodoc
+class _$DocCopyWithImpl<$Res> implements $DocCopyWith<$Res> {
+  _$DocCopyWithImpl(this._value, this._then);
+
+  final Doc _value;
+  // ignore: unused_field
+  final $Res Function(Doc) _then;
+
+  @override
+  $Res call({
+    Object? coverI = freezed,
+    Object? authorName = freezed,
+    Object? title = freezed,
+  }) {
+    return _then(_value.copyWith(
+      coverI: coverI == freezed
+          ? _value.coverI
+          : coverI // ignore: cast_nullable_to_non_nullable
+              as int?,
+      authorName: authorName == freezed
+          ? _value.authorName
+          : authorName // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
+      title: title == freezed
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+abstract class _$DocCopyWith<$Res> implements $DocCopyWith<$Res> {
+  factory _$DocCopyWith(_Doc value, $Res Function(_Doc) then) =
+      __$DocCopyWithImpl<$Res>;
+  @override
+  $Res call(
+      {@JsonKey(name: 'cover_i') int? coverI,
+      @JsonKey(name: 'author_name') List<String>? authorName,
+      String title});
+}
+
+/// @nodoc
+class __$DocCopyWithImpl<$Res> extends _$DocCopyWithImpl<$Res>
+    implements _$DocCopyWith<$Res> {
+  __$DocCopyWithImpl(_Doc _value, $Res Function(_Doc) _then)
+      : super(_value, (v) => _then(v as _Doc));
+
+  @override
+  _Doc get _value => super._value as _Doc;
+
+  @override
+  $Res call({
+    Object? coverI = freezed,
+    Object? authorName = freezed,
+    Object? title = freezed,
+  }) {
+    return _then(_Doc(
+      coverI == freezed
+          ? _value.coverI
+          : coverI // ignore: cast_nullable_to_non_nullable
+              as int?,
+      authorName == freezed
+          ? _value.authorName
+          : authorName // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
+      title == freezed
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_Doc implements _Doc {
+  _$_Doc(@JsonKey(name: 'cover_i') this.coverI,
+      @JsonKey(name: 'author_name') this.authorName, this.title);
+
+  factory _$_Doc.fromJson(Map<String, dynamic> json) => _$$_DocFromJson(json);
+
+  @override
+  @JsonKey(name: 'cover_i')
+  final int? coverI;
+  @override
+  @JsonKey(name: 'author_name')
+  final List<String>? authorName;
+  @override
+  final String title;
+
+  @override
+  String toString() {
+    return 'Doc(coverI: $coverI, authorName: $authorName, title: $title)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _Doc &&
+            const DeepCollectionEquality().equals(other.coverI, coverI) &&
+            const DeepCollectionEquality()
+                .equals(other.authorName, authorName) &&
+            const DeepCollectionEquality().equals(other.title, title));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(coverI),
+      const DeepCollectionEquality().hash(authorName),
+      const DeepCollectionEquality().hash(title));
+
+  @JsonKey(ignore: true)
+  @override
+  _$DocCopyWith<_Doc> get copyWith =>
+      __$DocCopyWithImpl<_Doc>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_DocToJson(this);
+  }
+}
+
+abstract class _Doc implements Doc {
+  factory _Doc(
+      @JsonKey(name: 'cover_i') int? coverI,
+      @JsonKey(name: 'author_name') List<String>? authorName,
+      String title) = _$_Doc;
+
+  factory _Doc.fromJson(Map<String, dynamic> json) = _$_Doc.fromJson;
+
+  @override
+  @JsonKey(name: 'cover_i')
+  int? get coverI;
+  @override
+  @JsonKey(name: 'author_name')
+  List<String>? get authorName;
+  @override
+  String get title;
+  @override
+  @JsonKey(ignore: true)
+  _$DocCopyWith<_Doc> get copyWith => throw _privateConstructorUsedError;
 }

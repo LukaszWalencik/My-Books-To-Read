@@ -37,17 +37,19 @@ class MyFavorites extends StatelessWidget {
                         color: Colors.black26,
                         child: Row(
                           children: [
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Column(
-                                children: [
-                                  Text(
-                                    document.name,
-                                    style: const TextStyle(fontSize: 20),
-                                  ),
-                                  Text(document.author,
-                                      style: const TextStyle(fontSize: 20)),
-                                ],
+                            Expanded(
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Column(
+                                  children: [
+                                    Text(
+                                      document.name,
+                                      style: const TextStyle(fontSize: 20),
+                                    ),
+                                    Text(document.author,
+                                        style: const TextStyle(fontSize: 20)),
+                                  ],
+                                ),
                               ),
                             )
                           ],

@@ -1,15 +1,12 @@
-// import 'package:json_annotation/json_annotation.dart';
-
+import 'dart:convert';
 import 'package:freezed_annotation/freezed_annotation.dart';
+
 part 'book_model.freezed.dart';
 part 'book_model.g.dart';
 
 @freezed
 class BookModel with _$BookModel {
-  factory BookModel(
-    String title,
-    @JsonKey(name: 'author_name') String authorName,
-  ) = _BookModel;
+  factory BookModel(List<Doc> docs) = _BookModel;
 
   factory BookModel.fromJson(Map<String, dynamic> json) =>
       _$BookModelFromJson(json);
@@ -17,22 +14,43 @@ class BookModel with _$BookModel {
 
 // @JsonSerializable()
 // class BookModel {
-//   const BookModel({
-//     required this.title,
-//     required this.authorName,
+//   BookModel({
+//     required this.docs,
 //   });
 
-//   final String title;
+//   List<Doc> docs;
 
-//   @JsonKey(name: 'author_name')
-//   final String authorName;
-
-//   factory BookModel.fromJson(Map<String, dynamic> json) =>
-//       _$BookModelFromJson(json);
-//   Map<String, dynamic> toJson() => _$BookModelToJson(this);
+//   factory BookModel.fromJson(Map<String, dynamic> json) => BookModel(
+//         docs: List<Doc>.from(json["docs"].map((x) => Doc.fromJson(x))),
+//       );
 // }
 
-//   BookModel.fromJson(Map<String, dynamic> json)
-//       : title = json['title'],
-//         authorName = json['author_name'];
+@freezed
+class Doc with _$Doc {
+  factory Doc(
+    @JsonKey(name: 'cover_i') int? coverI,
+    @JsonKey(name: 'author_name') List<String>? authorName,
+    String title,
+  ) = _Doc;
+
+  factory Doc.fromJson(Map<String, dynamic> json) => _$DocFromJson(json);
+}
+
+// @JsonSerializable()
+// class Doc {
+//   Doc({
+//     this.coverI,
+//     required this.title,
+//     this.authorName,
+//   });
+
+//   int? coverI;
+//   String title;
+//   List<String>? authorName;
+
+//   factory Doc.fromJson(Map<String, dynamic> json) => Doc(
+//         coverI: json["cover_i"],
+//         title: json["title"],
+//         authorName: List<String>.from(json["author_name"].map((x) => x)),
+//       );
 // }

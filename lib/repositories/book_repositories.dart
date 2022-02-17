@@ -3,14 +3,14 @@ import 'package:my_books_to_read/models/book_model.dart';
 
 class BooksRepository {
   BooksRepository(this.booksRemoteDataSource);
-  final BooksRemoteRetrofitDataSource booksRemoteDataSource;
+  final BooksRemoteDataSource booksRemoteDataSource;
 
-  Future<List<BookModel>> getBookModel({required String bookName}) async {
-    final json = await booksRemoteDataSource.getTasks(bookName);
-    // if (json == null) {
-    //   return [];
-    // }
-    return json;
-    // .map((item) => BookModel.fromJson(item)).toList();
+  Future<BookModel?> getBookModel({required String bookName}) async {
+    final futureBookModel =
+        await booksRemoteDataSource.getBooks(bookName: bookName);
+    if (futureBookModel == null) {
+      return null;
+    }
+    return BookModel.fromJson(futureBookModel);
   }
 }
