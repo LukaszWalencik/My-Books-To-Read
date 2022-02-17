@@ -40,47 +40,15 @@ class _BookListState extends State<BookList> {
         child: BlocBuilder<BooklistCubit, BooklistState>(
           builder: (context, state) {
             var searchcontroller = TextEditingController();
+            final books = state.model?.docs ?? [];
+
             // return Builder(builder: (context) {
             //   if (booksModel == null) {
             return Padding(
               padding: const EdgeInsets.all(8.0),
               child: Column(
                 children: [
-                  Row(
-                    children: [
-                      Expanded(
-                        child: TextField(
-                          decoration: const InputDecoration(
-                            filled: true,
-                            fillColor: Colors.black38,
-                            hintText: 'Write name of the book',
-                            hintStyle: TextStyle(fontSize: 15),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide:
-                                  BorderSide(color: Colors.white, width: 2.0),
-                            ),
-                          ),
-                          controller: searchcontroller,
-                        ),
-                      ),
-                      const SizedBox(
-                        width: 5,
-                      ),
-                      ElevatedButton.icon(
-                        onPressed: () {
-                          context
-                              .read<BooklistCubit>()
-                              .getBookModel(bookName: searchcontroller.text);
-                        },
-                        icon: const Icon(Icons.search),
-                        label: const Text('Search'),
-                        style: ElevatedButton.styleFrom(
-                          primary: Colors.purple,
-                          fixedSize: const Size(120, 48),
-                        ),
-                      )
-                    ],
-                  ),
+                  SearchBar(searchcontroller: searchcontroller),
                   Builder(builder: (context) {
                     if (state.status == Status.error) {
                       return const Center(
@@ -92,13 +60,15 @@ class _BookListState extends State<BookList> {
                       return const CircularProgressIndicator();
                     }
 
-                    return Column(
-                      children: [
-                        for (final book in state.model)
-                          BookPosition(
-                            bookModel: book,
-                          ),
-                      ],
+                    return Expanded(
+                      child: ListView.builder(
+                        itemCount: books.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          final book = books[index].authorName ?? [];
+                          return BookPosition(
+                              docs: books, authors: book, index: index);
+                        },
+                      ),
                     );
                   })
                 ],
@@ -111,61 +81,113 @@ class _BookListState extends State<BookList> {
   }
 }
 
-class BookPosition extends StatelessWidget {
-  const BookPosition({
+class SearchBar extends StatelessWidget {
+  const SearchBar({
     Key? key,
-    required this.bookModel,
+    required this.searchcontroller,
   }) : super(key: key);
 
-  final BookModel bookModel;
+  final TextEditingController searchcontroller;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Expanded(
+          child: TextField(
+            decoration: const InputDecoration(
+              filled: true,
+              fillColor: Colors.black38,
+              hintText: 'Write name of the book',
+              hintStyle: TextStyle(fontSize: 15),
+              focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.white, width: 2.0),
+              ),
+            ),
+            controller: searchcontroller,
+          ),
+        ),
+        const SizedBox(
+          width: 5,
+        ),
+        ElevatedButton.icon(
+          onPressed: () {
+            context
+                .read<BooklistCubit>()
+                .getBookModel(bookName: searchcontroller.text);
+          },
+          icon: const Icon(Icons.search),
+          label: const Text('Search'),
+          style: ElevatedButton.styleFrom(
+            primary: Colors.purple,
+            fixedSize: const Size(120, 48),
+          ),
+        )
+      ],
+    );
+  }
+}
+
+class BookPosition extends StatelessWidget {
+  const BookPosition(
+      {Key? key,
+      required this.docs,
+      required this.authors,
+      required this.index})
+      : super(key: key);
+
+  final List<Doc> docs;
+  final List<String> authors;
+  final int index;
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<BooklistCubit, BooklistState>(
       builder: (context, state) {
-        return ListView(
-          children: [
-            Container(
-              color: Colors.black38,
-              child: Column(
-                children: [
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Column(
-                          children: [
-                            Text('bookModel.docs.'),
-                            Text('bookModel.authorName'),
-                            const Text('example')
-                          ],
-                        ),
+        return Padding(
+          padding: const EdgeInsets.symmetric(vertical: 5),
+          child: Container(
+            color: Colors.black38,
+            child: Column(
+              children: [
+                Row(
+                  children: [
+                    Expanded(
+                      child: Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(5.0),
+                            child: Text(docs[index].title),
+                          ),
+                        ],
                       ),
-                      IconButton(
-                        icon: const Icon(
-                          Icons.star,
-                          color: Colors.white,
-                        ),
-                        onPressed: () {},
-                      ),
-                      BlocBuilder<BooklistCubit, BooklistState>(
-                        builder: (context, state) {
-                          return StarButton(
-                            isStarred: false,
-                            // iconDisabledColor: Colors.white,
-                            valueChanged: (_isStarred) {
-                              // context.read<BooklistCubit>().add(
-                              // author: bookModel.authorName,
-                              // name: bookModel.title,
-                              // );
-                            },
-                          );
-                        },
-                      ),
-                    ],
-                  ),
-                ],
-              ),
+                    ),
+                    // IconButton(
+                    //   icon: const Icon(
+                    //     Icons.star,
+                    //     color: Colors.white,
+                    //   ),
+                    //   onPressed: () {},
+                    // ),
+                    BlocBuilder<BooklistCubit, BooklistState>(
+                      builder: (context, state) {
+                        return StarButton(
+                          isStarred: false,
+                          // iconDisabledColor: Colors.white,
+                          valueChanged: (_isStarred) {
+                            context.read<BooklistCubit>().add(
+                                  author: authors[0],
+                                  name: docs[index].title,
+                                );
+                          },
+                        );
+                      },
+                    ),
+                  ],
+                ),
+              ],
             ),
-          ],
+          ),
         );
       },
     );

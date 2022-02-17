@@ -26,7 +26,7 @@ class BooklistCubit extends Cubit<BooklistState> {
       final bookModel = await booksRepository.getBookModel(bookName: bookName);
       emit(
         BooklistState(
-          // model: bookModel,
+          model: bookModel,
           status: Status.success,
         ),
       );
@@ -43,7 +43,6 @@ class BooklistCubit extends Cubit<BooklistState> {
   Future<void> add({required String name, required String author}) async {
     try {
       await _itemRepository.add(name, author);
-      emit(const BooklistState());
     } catch (error) {
       emit(BooklistState(errorMessage: error.toString()));
     }
