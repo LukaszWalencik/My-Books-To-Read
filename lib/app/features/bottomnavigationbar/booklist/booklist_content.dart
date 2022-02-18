@@ -155,10 +155,17 @@ class BookPosition extends StatelessWidget {
                     Expanded(
                       child: Column(
                         children: [
-                          Padding(
-                            padding: const EdgeInsets.all(5.0),
-                            child: Text(docs[index].title),
+                          Text(
+                            docs[index].title,
+                            style: TextStyle(
+                                fontSize: 15, fontWeight: FontWeight.bold),
                           ),
+                          Text(
+                            authors.isNotEmpty
+                                ? authors[0]
+                                : 'Author not added',
+                            style: TextStyle(fontStyle: FontStyle.italic),
+                          )
                         ],
                       ),
                     ),

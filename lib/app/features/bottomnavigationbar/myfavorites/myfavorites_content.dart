@@ -27,6 +27,9 @@ class MyFavorites extends StatelessWidget {
               child: ListView(children: [
                 for (final document in itemModels) ...[
                   Dismissible(
+                    background: Container(
+                      color: Colors.red,
+                    ),
                     key: ValueKey(document.id),
                     onDismissed: (_) {
                       context.read<MyfavoritesCubit>().delete(id: document.id);
@@ -44,10 +47,13 @@ class MyFavorites extends StatelessWidget {
                                   children: [
                                     Text(
                                       document.name,
-                                      style: const TextStyle(fontSize: 20),
+                                      style: const TextStyle(
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.bold),
                                     ),
                                     Text(document.author,
-                                        style: const TextStyle(fontSize: 20)),
+                                        style: const TextStyle(
+                                            fontStyle: FontStyle.italic)),
                                   ],
                                 ),
                               ),

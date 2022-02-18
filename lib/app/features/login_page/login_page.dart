@@ -39,21 +39,25 @@ class _LoginPageState extends State<LoginPage> {
             child: Center(
               child: Padding(
                 padding: const EdgeInsets.all(10.0),
-                child: Expanded(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Flexible(
+                      child: Text(
                         creatingAccount == false ? 'Login' : 'Sign in',
                         style: const TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 15,
                         ),
                       ),
-                      const SizedBox(
+                    ),
+                    const Flexible(
+                      child: SizedBox(
                         height: 50,
                       ),
-                      TextField(
+                    ),
+                    Flexible(
+                      child: TextField(
                         controller: widget.emailController,
                         decoration: const InputDecoration(
                           prefixIcon: Icon(
@@ -63,10 +67,14 @@ class _LoginPageState extends State<LoginPage> {
                           hintText: 'Email',
                         ),
                       ),
-                      const SizedBox(
+                    ),
+                    const Flexible(
+                      child: SizedBox(
                         height: 15,
                       ),
-                      TextField(
+                    ),
+                    Flexible(
+                      child: TextField(
                         obscureText: true,
                         controller: widget.passwordController,
                         decoration: const InputDecoration(
@@ -77,20 +85,28 @@ class _LoginPageState extends State<LoginPage> {
                           hintText: 'Password',
                         ),
                       ),
-                      const SizedBox(
+                    ),
+                    const Flexible(
+                      child: SizedBox(
                         height: 20,
                       ),
-                      Text(
+                    ),
+                    Flexible(
+                      child: Text(
                         errorMessage,
                         style: const TextStyle(
                             color: Colors.red,
                             fontSize: 15,
                             fontWeight: FontWeight.bold),
                       ),
-                      const SizedBox(
+                    ),
+                    Flexible(
+                      child: const SizedBox(
                         height: 20,
                       ),
-                      ElevatedButton(
+                    ),
+                    Flexible(
+                      child: ElevatedButton(
                           onPressed: () async {
                             if (creatingAccount == true) {
                               try {
@@ -130,11 +146,15 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                           style:
                               ElevatedButton.styleFrom(primary: Colors.purple)),
-                      const SizedBox(
+                    ),
+                    Flexible(
+                      child: const SizedBox(
                         height: 20,
                       ),
-                      if (creatingAccount == false) ...[
-                        TextButton(
+                    ),
+                    if (creatingAccount == false) ...[
+                      Flexible(
+                        child: TextButton(
                           onPressed: () {
                             setState(() {
                               creatingAccount = true;
@@ -145,10 +165,12 @@ class _LoginPageState extends State<LoginPage> {
                             'Create account',
                             style: TextStyle(color: Colors.purple),
                           ),
-                        )
-                      ],
-                      if (creatingAccount == true) ...[
-                        TextButton(
+                        ),
+                      )
+                    ],
+                    if (creatingAccount == true) ...[
+                      Flexible(
+                        child: TextButton(
                           onPressed: () {
                             setState(() {
                               creatingAccount = false;
@@ -157,9 +179,9 @@ class _LoginPageState extends State<LoginPage> {
                           child: const Text('Already have account?',
                               style: TextStyle(color: Colors.purple)),
                         ),
-                      ]
-                    ],
-                  ),
+                      ),
+                    ]
+                  ],
                 ),
               ),
             ),
