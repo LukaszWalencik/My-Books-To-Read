@@ -1,12 +1,14 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
 import 'package:my_books_to_read/models/favorites_model.dart';
 import 'package:my_books_to_read/repositories/favorites_repositories.dart';
 
 part 'myfavorites_state.dart';
 
+@injectable
 class MyfavoritesCubit extends Cubit<MyfavoritesState> {
   MyfavoritesCubit(
     this._itemRepository,

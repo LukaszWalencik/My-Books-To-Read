@@ -20,7 +20,7 @@ class MyFavorites extends StatelessWidget {
           }
           if (state.isLoading == true) {
             return Column(
-              children: [
+              children: const [
                 SizedBox(
                   height: 60,
                 ),

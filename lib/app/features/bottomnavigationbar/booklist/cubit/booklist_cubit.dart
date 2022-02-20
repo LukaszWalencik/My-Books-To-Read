@@ -1,17 +1,19 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:meta/meta.dart';
+// import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:injectable/injectable.dart';
 import 'package:my_books_to_read/app/core/enums.dart';
 import 'package:my_books_to_read/models/book_model.dart';
 import 'package:my_books_to_read/repositories/book_repositories.dart';
 import 'package:my_books_to_read/repositories/favorites_repositories.dart';
-
+// part 'booklist_cubit.freezed.dart';
 part 'booklist_state.dart';
 
+@injectable
 class BooklistCubit extends Cubit<BooklistState> {
   BooklistCubit(this.booksRepository, this._itemRepository)
-      : super(const BooklistState());
+      : super(BooklistState());
 
   final BooksRepository booksRepository;
   final ItemRepository _itemRepository;
@@ -20,7 +22,7 @@ class BooklistCubit extends Cubit<BooklistState> {
     required String bookName,
   }) async {
     emit(
-      const BooklistState(status: Status.loading),
+      BooklistState(status: Status.loading),
     );
     try {
       final bookModel = await booksRepository.getBookModel(bookName: bookName);

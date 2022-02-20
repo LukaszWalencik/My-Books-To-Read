@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:injectable/injectable.dart';
 import 'package:my_books_to_read/models/favorites_model.dart';
 
+@injectable
 class ItemRepository {
   Stream<List<ItemModels>> getItemsStream() {
     final userID = FirebaseAuth.instance.currentUser?.uid;

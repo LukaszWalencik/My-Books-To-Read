@@ -1,5 +1,7 @@
+import 'package:injectable/injectable.dart';
 import 'package:my_books_to_read/app/data/remote_data_sources/firebase_data_source.dart';
 
+@injectable
 class AccountRepository {
   AccountRepository(this.firebaseDataSource);
 

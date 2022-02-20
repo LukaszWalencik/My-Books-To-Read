@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_books_to_read/app/core/enums.dart';
@@ -23,7 +22,7 @@ class LoginPage extends StatelessWidget {
               if (state.status == Status.error) {
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
-                    content: Text('${state.errorMessage}'),
+                    content: Text(state.errorMessage),
                   ),
                 );
               }

@@ -1,9 +1,11 @@
 import 'package:bloc/bloc.dart';
+import 'package:injectable/injectable.dart';
 import 'package:my_books_to_read/app/core/enums.dart';
 
 import 'package:my_books_to_read/repositories/account_repositories.dart';
 part 'login_state.dart';
 
+@injectable
 class LoginCubit extends Cubit<LoginState> {
   LoginCubit(this._accountRepository)
       : super(const LoginState(status: Status.initial));

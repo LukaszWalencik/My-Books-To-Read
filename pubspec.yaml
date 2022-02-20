@@ -46,6 +46,7 @@ dependencies:
   http: ^0.13.4
   retrofit: ^3.0.1+1
   get_it: ^7.2.0
+  injectable: ^1.5.3
   
 
 dev_dependencies:
@@ -62,6 +63,7 @@ dev_dependencies:
   freezed: ^1.1.1
   json_serializable: ^6.1.4
   retrofit_generator: ^4.0.1
+  injectable_generator: ^1.5.3
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
