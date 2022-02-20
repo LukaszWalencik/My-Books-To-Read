@@ -1,8 +1,7 @@
 part of 'booklist_cubit.dart';
 
-@immutable
 class BooklistState {
-  const BooklistState({
+  BooklistState({
     this.model,
     this.saved = false,
     this.status = Status.initial,

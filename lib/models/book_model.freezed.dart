@@ -166,10 +166,9 @@ Doc _$DocFromJson(Map<String, dynamic> json) {
 class _$DocTearOff {
   const _$DocTearOff();
 
-  _Doc call(@JsonKey(name: 'cover_i') int? coverI,
+  _Doc call(
       @JsonKey(name: 'author_name') List<String>? authorName, String title) {
     return _Doc(
-      coverI,
       authorName,
       title,
     );
@@ -185,8 +184,6 @@ const $Doc = _$DocTearOff();
 
 /// @nodoc
 mixin _$Doc {
-  @JsonKey(name: 'cover_i')
-  int? get coverI => throw _privateConstructorUsedError;
   @JsonKey(name: 'author_name')
   List<String>? get authorName => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
@@ -201,9 +198,7 @@ abstract class $DocCopyWith<$Res> {
   factory $DocCopyWith(Doc value, $Res Function(Doc) then) =
       _$DocCopyWithImpl<$Res>;
   $Res call(
-      {@JsonKey(name: 'cover_i') int? coverI,
-      @JsonKey(name: 'author_name') List<String>? authorName,
-      String title});
+      {@JsonKey(name: 'author_name') List<String>? authorName, String title});
 }
 
 /// @nodoc
@@ -216,15 +211,10 @@ class _$DocCopyWithImpl<$Res> implements $DocCopyWith<$Res> {
 
   @override
   $Res call({
-    Object? coverI = freezed,
     Object? authorName = freezed,
     Object? title = freezed,
   }) {
     return _then(_value.copyWith(
-      coverI: coverI == freezed
-          ? _value.coverI
-          : coverI // ignore: cast_nullable_to_non_nullable
-              as int?,
       authorName: authorName == freezed
           ? _value.authorName
           : authorName // ignore: cast_nullable_to_non_nullable
@@ -243,9 +233,7 @@ abstract class _$DocCopyWith<$Res> implements $DocCopyWith<$Res> {
       __$DocCopyWithImpl<$Res>;
   @override
   $Res call(
-      {@JsonKey(name: 'cover_i') int? coverI,
-      @JsonKey(name: 'author_name') List<String>? authorName,
-      String title});
+      {@JsonKey(name: 'author_name') List<String>? authorName, String title});
 }
 
 /// @nodoc
@@ -259,15 +247,10 @@ class __$DocCopyWithImpl<$Res> extends _$DocCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? coverI = freezed,
     Object? authorName = freezed,
     Object? title = freezed,
   }) {
     return _then(_Doc(
-      coverI == freezed
-          ? _value.coverI
-          : coverI // ignore: cast_nullable_to_non_nullable
-              as int?,
       authorName == freezed
           ? _value.authorName
           : authorName // ignore: cast_nullable_to_non_nullable
@@ -283,14 +266,10 @@ class __$DocCopyWithImpl<$Res> extends _$DocCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_Doc implements _Doc {
-  _$_Doc(@JsonKey(name: 'cover_i') this.coverI,
-      @JsonKey(name: 'author_name') this.authorName, this.title);
+  _$_Doc(@JsonKey(name: 'author_name') this.authorName, this.title);
 
   factory _$_Doc.fromJson(Map<String, dynamic> json) => _$$_DocFromJson(json);
 
-  @override
-  @JsonKey(name: 'cover_i')
-  final int? coverI;
   @override
   @JsonKey(name: 'author_name')
   final List<String>? authorName;
@@ -299,7 +278,7 @@ class _$_Doc implements _Doc {
 
   @override
   String toString() {
-    return 'Doc(coverI: $coverI, authorName: $authorName, title: $title)';
+    return 'Doc(authorName: $authorName, title: $title)';
   }
 
   @override
@@ -307,7 +286,6 @@ class _$_Doc implements _Doc {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _Doc &&
-            const DeepCollectionEquality().equals(other.coverI, coverI) &&
             const DeepCollectionEquality()
                 .equals(other.authorName, authorName) &&
             const DeepCollectionEquality().equals(other.title, title));
@@ -316,7 +294,6 @@ class _$_Doc implements _Doc {
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(coverI),
       const DeepCollectionEquality().hash(authorName),
       const DeepCollectionEquality().hash(title));
 
@@ -332,16 +309,11 @@ class _$_Doc implements _Doc {
 }
 
 abstract class _Doc implements Doc {
-  factory _Doc(
-      @JsonKey(name: 'cover_i') int? coverI,
-      @JsonKey(name: 'author_name') List<String>? authorName,
+  factory _Doc(@JsonKey(name: 'author_name') List<String>? authorName,
       String title) = _$_Doc;
 
   factory _Doc.fromJson(Map<String, dynamic> json) = _$_Doc.fromJson;
 
-  @override
-  @JsonKey(name: 'cover_i')
-  int? get coverI;
   @override
   @JsonKey(name: 'author_name')
   List<String>? get authorName;

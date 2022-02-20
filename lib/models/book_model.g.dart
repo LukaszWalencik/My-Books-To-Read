@@ -18,13 +18,11 @@ Map<String, dynamic> _$$_BookModelToJson(_$_BookModel instance) =>
     };
 
 _$_Doc _$$_DocFromJson(Map<String, dynamic> json) => _$_Doc(
-      json['cover_i'] as int?,
       (json['author_name'] as List<dynamic>?)?.map((e) => e as String).toList(),
       json['title'] as String,
     );
 
 Map<String, dynamic> _$$_DocToJson(_$_Doc instance) => <String, dynamic>{
-      'cover_i': instance.coverI,
       'author_name': instance.authorName,
       'title': instance.title,
     };

@@ -24,17 +24,6 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        // actions: [
-        //   IconButton(
-        //       onPressed: () {
-        //         Navigator.of(context).push(
-        //           MaterialPageRoute(
-        //             builder: (_) => AccountPage(email: widget.user.email),
-        //           ),
-        //         );
-        //       },
-        //       icon: const Icon(Icons.person))
-        // ],
         centerTitle: true,
         backgroundColor: Colors.purple,
         title: const Text(
@@ -56,10 +45,6 @@ class _HomePageState extends State<HomePage> {
           }
 
           return AccountPage(email: widget.user.email, user: widget.user);
-
-          // return AccountPage(
-          //   email: widget.user.email,
-          // );
         },
       ),
       bottomNavigationBar: BottomNavigationBar(

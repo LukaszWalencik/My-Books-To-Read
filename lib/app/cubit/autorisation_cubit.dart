@@ -2,10 +2,12 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
 
 part 'autorisation_state.dart';
 
+@injectable
 class AuthorisationCubit extends Cubit<AuthorisationState> {
   AuthorisationCubit()
       : super(const AuthorisationState(
