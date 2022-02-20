@@ -59,23 +59,3 @@ class ItemRepository {
     );
   }
 }
-
-// class BooksRepository {
-//   BooksRepository(this._booksRemoteDataSource);
-
-//   final BooksRemoteDataSource _booksRemoteDataSource;
-
-//   Future<List<BooksModel>> getBooksModel({
-//     required String bookName,
-//   }) async {
-//     final responseData =
-//         await _booksRemoteDataSource.getBooksData(bookName: bookName);
-//     if (responseData == null) {
-//       return [];
-//     }
-//     return responseData.map((item) => BooksModel.fromJson(item)).toList();
-//     // final name = responseData['docs' 'title'] as String;
-//     // return BooksModel(bookName: name);
-//   }
-// }
-

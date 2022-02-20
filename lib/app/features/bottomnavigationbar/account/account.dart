@@ -51,25 +51,3 @@ class AccountPage extends StatelessWidget {
     );
   }
 }
-
-// class LogOutButton extends StatelessWidget {
-//   const LogOutButton({
-//     Key? key,
-//   }) : super(key: key);
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return ElevatedButton(
-//       onPressed: () {
-//         FirebaseAuth.instance.signOut();
-//         Navigator.of(context).pop();
-//         // context.read<AccountCubit>().logOut();
-//       },
-//       child: Text(
-//         'Logout',
-//         style: TextStyle(color: Colors.amber),
-//       ),
-//       style: ElevatedButton.styleFrom(primary: Colors.grey[700]),
-//     );
-//   }
-// }

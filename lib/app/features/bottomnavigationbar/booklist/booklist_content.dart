@@ -41,9 +41,6 @@ class _BookListState extends State<BookList> {
           builder: (context, state) {
             var searchcontroller = TextEditingController();
             final books = state.model?.docs ?? [];
-
-            // return Builder(builder: (context) {
-            //   if (booksModel == null) {
             return Padding(
               padding: const EdgeInsets.all(8.0),
               child: Column(
@@ -193,88 +190,3 @@ class BookPosition extends StatelessWidget {
     );
   }
 }
-
-// class SearchLine extends StatelessWidget {
-//   SearchLine({
-//     Key? key,
-//   }) : super(key: key);
-
-//   final _searchcontroller = TextEditingController();
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Row(
-//       children: [
-//         TextField(
-//           decoration: const InputDecoration(
-//             filled: true,
-//             fillColor: Colors.black38,
-//             hintText: 'Write name of the book',
-//             hintStyle: TextStyle(fontSize: 15),
-//             focusedBorder: OutlineInputBorder(
-//               borderSide: BorderSide(color: Colors.white, width: 2.0),
-//             ),
-//           ),
-//           controller: _searchcontroller,
-//         ),
-//         const SizedBox(
-//           width: 5,
-//         ),
-        // ElevatedButton.icon(
-        //   onPressed: () {
-        //     context
-        //         .read<BooklistCubit>()
-        //         .getBooksModel(name: _searchcontroller.text);
-        //   },
-        //   icon: const Icon(Icons.search),
-        //   label: const Text('Search'),
-        //   style: ElevatedButton.styleFrom(
-        //     primary: Colors.purple,
-        //     fixedSize: const Size(120, 48),
-        //   ),
-        // )
-//       ],
-//     );
-//   }
-// }
-
-// class BooksList extends StatelessWidget {
-//   const BooksList({
-//     required this.booksModel,
-//     Key? key,
-//   }) : super(key: key);
-
-//   final BooksModel booksModel;
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return BlocBuilder<BooklistCubit, BooklistState>(builder: (context, state) {
-//       final booksModel = state.model;
-//       return Builder(
-//         builder: (context) {
-//           if (booksModel == null) {
-//             return const SizedBox.shrink();
-//           }
-//           if (state.status == Status.loading) {
-//             return const Text('Loading');
-//           }
-
-//           return Padding(
-//             padding: const EdgeInsets.all(8.0),
-//             child: Container(
-//               color: Colors.black26,
-//               child: Row(
-//                 children: [
-//                   Column(
-//                     children: [Text(booksModel.bookName)],
-//                   ),
-//                   IconButton(onPressed: () {}, icon: const Icon(Icons.star))
-//                 ],
-//               ),
-//             ),
-//           );
-//         },
-//       );
-//     });
-//   }
-// }

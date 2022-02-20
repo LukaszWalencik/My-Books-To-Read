@@ -110,42 +110,6 @@ class LoginPage extends StatelessWidget {
                                       context.read<LoginCubit>().singIn(
                                           emailController.text,
                                           passwordController.text);
-
-                                      // if (creatingAccount == true) {
-                                      //   try {
-                                      //     await FirebaseAuth.instance
-                                      //         .createUserWithEmailAndPassword(
-                                      //             email:
-                                      //                 widget.emailController.text,
-                                      //             password: widget
-                                      //                 .passwordController.text);
-                                      //   } catch (error) {
-                                      //     setState(() {
-                                      //       errorMessage = 'Something went wrong!';
-                                      //     });
-                                      //     widget.emailController.clear();
-                                      //     widget.passwordController.clear();
-                                      //   }
-                                      // } else {
-                                      //   try {
-                                      //     await FirebaseAuth.instance
-                                      //         .signInWithEmailAndPassword(
-                                      //       email: widget.emailController.text,
-                                      //       password:
-                                      //           widget.passwordController.text,
-                                      //     );
-                                      //     widget.emailController.clear();
-                                      //     widget.passwordController.clear();
-                                      //     // widget.onCreate();
-                                      //   } catch (error) {
-                                      //     setState(() {
-                                      //       errorMessage =
-                                      //           'Wrong email or password!';
-                                      //     });
-                                      //     widget.emailController.clear();
-                                      //     widget.passwordController.clear();
-                                      //   }
-                                      // }
                                     },
                               child: Text(
                                 state.creatingAccount == false
