@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_books_to_read/app/core/enums.dart';
-import 'package:my_books_to_read/app/data/remote_data_sources/firebase_data_source.dart';
+import 'package:my_books_to_read/app/core/injection.dart';
 import 'package:my_books_to_read/app/features/login_page/cubit/login_cubit.dart';
-import 'package:my_books_to_read/repositories/account_repositories.dart';
 
 class LoginPage extends StatelessWidget {
   LoginPage({Key? key}) : super(key: key);
@@ -14,7 +13,7 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => LoginCubit(AccountRepository(FirebaseDataSource())),
+      create: (context) => injection<LoginCubit>(),
       child: BlocBuilder<LoginCubit, LoginState>(
         builder: (context, state) {
           return BlocListener<LoginCubit, LoginState>(

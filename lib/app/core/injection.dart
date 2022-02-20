@@ -6,7 +6,7 @@ import 'package:my_books_to_read/app/core/injection.config.dart';
 final injection = GetIt.instance;
 
 @InjectableInit()
-void njectionDependecies() => $initGetIt(injection);
+void injectionDependecies() => $initGetIt(injection);
 
 @module
 abstract class RegisterModule {

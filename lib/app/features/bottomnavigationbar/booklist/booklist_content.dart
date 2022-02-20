@@ -1,14 +1,10 @@
-import 'package:dio/dio.dart';
 import 'package:favorite_button/favorite_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_books_to_read/app/core/enums.dart';
-import 'package:my_books_to_read/app/data/remote_data_sources/books_remote_data_source.dart';
+import 'package:my_books_to_read/app/core/injection.dart';
 import 'package:my_books_to_read/app/features/bottomnavigationbar/booklist/cubit/booklist_cubit.dart';
 import 'package:my_books_to_read/models/book_model.dart';
-
-import 'package:my_books_to_read/repositories/book_repositories.dart';
-import 'package:my_books_to_read/repositories/favorites_repositories.dart';
 
 class BookList extends StatefulWidget {
   const BookList({
@@ -23,8 +19,7 @@ class _BookListState extends State<BookList> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => BooklistCubit(
-          BooksRepository(BooksRemoteDataSource(Dio())), ItemRepository()),
+      create: (context) => injection<BooklistCubit>(),
       child: BlocListener<BooklistCubit, BooklistState>(
         listener: (context, state) {
           if (state.status == Status.error) {
@@ -166,20 +161,16 @@ class BookPosition extends StatelessWidget {
                         ],
                       ),
                     ),
-                    BlocBuilder<BooklistCubit, BooklistState>(
-                      builder: (context, state) {
-                        return StarButton(
-                          isStarred: false,
-                          // iconDisabledColor: Colors.white,
-                          valueChanged: (_isStarred) {
-                            context.read<BooklistCubit>().add(
-                                  author: authors[0],
-                                  name: docs[index].title,
-                                );
-                          },
-                        );
+                    StarButton(
+                      isStarred: false,
+                      // iconDisabledColor: Colors.white,
+                      valueChanged: (_isStarred) {
+                        context.read<BooklistCubit>().add(
+                              author: authors[0],
+                              name: docs[index].title,
+                            );
                       },
-                    ),
+                    )
                   ],
                 ),
               ],

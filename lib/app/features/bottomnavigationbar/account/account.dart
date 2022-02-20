@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:my_books_to_read/app/core/injection.dart';
 import 'package:my_books_to_read/app/features/bottomnavigationbar/account/cubit/account_cubit.dart';
 
 class AccountPage extends StatelessWidget {
@@ -16,7 +17,7 @@ class AccountPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => AccountCubit(),
+      create: (context) => injection<AccountCubit>(),
       child: BlocBuilder<AccountCubit, AccountState>(
         builder: (context, state) {
           return Scaffold(
