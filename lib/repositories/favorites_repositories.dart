@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:my_books_to_read/models/item_models.dart';
+import 'package:my_books_to_read/models/favorites_model.dart';
 
 class ItemRepository {
   Stream<List<ItemModels>> getItemsStream() {

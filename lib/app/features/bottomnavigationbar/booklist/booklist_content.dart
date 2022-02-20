@@ -8,7 +8,7 @@ import 'package:my_books_to_read/app/features/bottomnavigationbar/booklist/cubit
 import 'package:my_books_to_read/models/book_model.dart';
 
 import 'package:my_books_to_read/repositories/book_repositories.dart';
-import 'package:my_books_to_read/repositories/item_repositories.dart';
+import 'package:my_books_to_read/repositories/favorites_repositories.dart';
 
 class BookList extends StatefulWidget {
   const BookList({
@@ -157,25 +157,18 @@ class BookPosition extends StatelessWidget {
                         children: [
                           Text(
                             docs[index].title,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 fontSize: 15, fontWeight: FontWeight.bold),
                           ),
                           Text(
                             authors.isNotEmpty
                                 ? authors[0]
                                 : 'Author not added',
-                            style: TextStyle(fontStyle: FontStyle.italic),
+                            style: const TextStyle(fontStyle: FontStyle.italic),
                           )
                         ],
                       ),
                     ),
-                    // IconButton(
-                    //   icon: const Icon(
-                    //     Icons.star,
-                    //     color: Colors.white,
-                    //   ),
-                    //   onPressed: () {},
-                    // ),
                     BlocBuilder<BooklistCubit, BooklistState>(
                       builder: (context, state) {
                         return StarButton(

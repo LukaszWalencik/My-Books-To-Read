@@ -57,9 +57,6 @@ class _HomePageState extends State<HomePage> {
 
           return AccountPage(email: widget.user.email, user: widget.user);
 
-          // return AccountPage(
-          //   email: widget.user.email,
-          // );
         },
       ),
       bottomNavigationBar: BottomNavigationBar(

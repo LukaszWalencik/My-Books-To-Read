@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_books_to_read/app/features/bottomnavigationbar/myfavorites/cubit/myfavorites_cubit.dart';
-import 'package:my_books_to_read/repositories/item_repositories.dart';
+import 'package:my_books_to_read/repositories/favorites_repositories.dart';
 
 class MyFavorites extends StatelessWidget {
   const MyFavorites({required this.email, required this.user, Key? key})
@@ -19,7 +19,14 @@ class MyFavorites extends StatelessWidget {
             return Text(state.errorMessage);
           }
           if (state.isLoading == true) {
-            return const Center(child: CircularProgressIndicator());
+            return Column(
+              children: [
+                SizedBox(
+                  height: 60,
+                ),
+                CircularProgressIndicator(),
+              ],
+            );
           }
           final itemModels = state.documents;
           return Padding(

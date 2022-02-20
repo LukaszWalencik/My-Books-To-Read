@@ -5,7 +5,7 @@ import 'package:meta/meta.dart';
 import 'package:my_books_to_read/app/core/enums.dart';
 import 'package:my_books_to_read/models/book_model.dart';
 import 'package:my_books_to_read/repositories/book_repositories.dart';
-import 'package:my_books_to_read/repositories/item_repositories.dart';
+import 'package:my_books_to_read/repositories/favorites_repositories.dart';
 
 part 'booklist_state.dart';
 
