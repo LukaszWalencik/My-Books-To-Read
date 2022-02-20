@@ -24,7 +24,7 @@ class _BookListState extends State<BookList> {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => BooklistCubit(
-          BooksRepository(BooksRemoteDataSource()), ItemRepository()),
+          BooksRepository(BooksRemoteDataSource(Dio())), ItemRepository()),
       child: BlocListener<BooklistCubit, BooklistState>(
         listener: (context, state) {
           if (state.status == Status.error) {

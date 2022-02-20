@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'book_model.freezed.dart';
@@ -28,13 +27,13 @@ class BookModel with _$BookModel {
 @freezed
 class Doc with _$Doc {
   factory Doc(
-    @JsonKey(name: 'cover_i') int? coverI,
     @JsonKey(name: 'author_name') List<String>? authorName,
     String title,
   ) = _Doc;
 
   factory Doc.fromJson(Map<String, dynamic> json) => _$DocFromJson(json);
 }
+
 
 // @JsonSerializable()
 // class Doc {

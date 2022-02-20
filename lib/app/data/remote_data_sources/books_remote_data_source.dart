@@ -2,15 +2,25 @@ import 'package:dio/dio.dart';
 import 'package:my_books_to_read/models/book_model.dart';
 import 'package:retrofit/retrofit.dart';
 
-class BooksRemoteDataSource {
-  Future<Map<String, dynamic>?> getBooks({
-    required String bookName,
-  }) async {
-    final response = await Dio().get<Map<String, dynamic>>(
-        'http://openlibrary.org/search.json?q=$bookName');
-    return response.data;
-  }
+part 'books_remote_data_source.g.dart';
+
+@RestApi(baseUrl: "http://openlibrary.org/")
+abstract class BooksRemoteDataSource {
+  factory BooksRemoteDataSource(Dio dio, {String baseUrl}) =
+      _BooksRemoteDataSource;
+
+  @GET("/search.json?q={bookName}")
+  Future<BookModel?> getBooks(@Path('bookName') String bookName);
 }
+// class BooksRemoteDataSource {
+//   Future<Map<String, dynamic>?> getBooks({
+//     required String bookName,
+//   }) async {
+//     final response = await Dio().get<Map<String, dynamic>>(
+//         'http://openlibrary.org/search.json?q=$bookName');
+//     return response.data;
+//   }
+// }
 
 // part 'books_remote_data_source.g.dart';
 

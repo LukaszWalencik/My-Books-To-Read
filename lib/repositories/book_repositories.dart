@@ -6,11 +6,8 @@ class BooksRepository {
   final BooksRemoteDataSource booksRemoteDataSource;
 
   Future<BookModel?> getBookModel({required String bookName}) async {
-    final futureBookModel =
-        await booksRemoteDataSource.getBooks(bookName: bookName);
-    if (futureBookModel == null) {
-      return null;
-    }
-    return BookModel.fromJson(futureBookModel);
+    final futureBookModel = await booksRemoteDataSource.getBooks(bookName);
+
+    return futureBookModel;
   }
 }
